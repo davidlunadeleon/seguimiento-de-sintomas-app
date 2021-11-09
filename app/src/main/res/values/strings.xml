@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Seguimiento de Sintomas</string>
+    <string name="mail_hint">Correo electrónico</string>
+    <string name="hint_psswd">Contraseña</string>
+    <string name="register_button">Crear cuenta</string>
+    <string name="has_account">¿Ya tienes cuenta?</string>
+    <string name="login_link">Inicia sesión.</string>
+    <string name="register_phone">No. telefónico</string>
+    <string name="register_name">Nombre completo</string>
+    <string name="register_birth">Fecha de nacimiento</string>
 </resources>
