@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "817641445167",
+    "project_id": "sintomasapp-a4381",
+    "storage_bucket": "sintomasapp-a4381.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817641445167:android:51e810ef81c52ee38e33da",
+        "android_client_info": {
+          "package_name": "com.a00819647.seguimientodesintomas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817641445167-ib4s2bd3bvd7f4mjhd4r5qji02uta5me.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.a00819647.seguimientodesintomas",
+            "certificate_hash": "fef68f2cfe0e0586fae774ff3d4c133858531ca9"
+          }
+        },
+        {
+          "client_id": "817641445167-7blndmpnjqsktpvc3e5hlrr4b9v46r2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNib6ldbw9HAarH_xNOAT-GJsMXAZJnps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817641445167-7blndmpnjqsktpvc3e5hlrr4b9v46r2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
