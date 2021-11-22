@@ -37,5 +37,21 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
+        binding.symptomsButton.setOnClickListener {
+            //startActivity(Intent(this, SymptomsFragment::class.java))
+            val intent = Intent(this, SymptomsFragment::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                putExtra("user_id", userid)
+                putExtra("email_id", emailid)
+            }
+            startActivity(intent)
+            finish()
+        }
+
+        binding.profileButton.setOnClickListener {
+            startActivity(Intent(this, ProfileFragment::class.java))
+            finish()
+        }
     }
 }
