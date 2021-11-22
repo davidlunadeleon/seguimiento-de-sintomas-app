@@ -2,32 +2,111 @@ package com.a00819647.seguimientodesintomas
 
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Intent
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.a00819647.seguimientodesintomas.databinding.ActivityRegisterBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        auth = Firebase.auth
 
-        val register_birth = findViewById<EditText>(R.id.register_birth)
-
-        register_birth.setOnClickListener{
+        binding.registerBirth.setOnClickListener {
             showDatePickerDialog()
+        }
+
+        binding.registerButton.setOnClickListener {
+            evalRegister()
+        }
+
+        binding.loginLink.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    public override fun onStart() {
+        super.onStart()
+
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
     private fun showDatePickerDialog() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener{_, year, month, day ->
             val selectDate = day.toString() + " / " + (month + 1) + " / " + year
-            findViewById<EditText>(R.id.register_birth).setText(selectDate)
+            binding.registerBirth.setText(selectDate)
         })
         newFragment.show(supportFragmentManager, "datePicker")
+    }
+
+    private fun evalRegister() {
+        when {
+            // Caso 1: No hay valor en el apartado de Nombre
+            TextUtils.isEmpty(binding.registerName.text.toString().trim{ it <= ' ' }) -> {
+                Toast.makeText(this, "¡Por favor, inserte su nombre!", Toast.LENGTH_LONG).show()
+            }
+            // Caso 2: No hay valor en el apartado de Fecha de Nacimiento
+            TextUtils.isEmpty(binding.registerBirth.text.toString().trim{ it <= ' ' }) -> {
+                Toast.makeText(this, "¡Por favor, inserte su fecha de nacimiento!", Toast.LENGTH_LONG).show()
+            }
+            // Caso 3: No hay valor en el apartado de Teléfono
+            TextUtils.isEmpty(binding.registerPhone.text.toString().trim{ it <= ' ' }) -> {
+                Toast.makeText(this, "¡Por favor, inserte su número telefónico!", Toast.LENGTH_LONG).show()
+            }
+            // Caso 4: No hay valor en el apartado de Email
+            TextUtils.isEmpty(binding.registerEmail.text.toString().trim{ it <= ' ' }) -> {
+                Toast.makeText(this, "¡Por favor, inserte un correo electrónico!", Toast.LENGTH_LONG).show()
+            }
+            // Caso 5: No hay valor en el apartado de Contraseña
+            TextUtils.isEmpty(binding.registerPsswd.text.toString().trim{ it <= ' ' }) -> {
+                Toast.makeText(this, "¡Por favor, inserte una contraseña!", Toast.LENGTH_LONG).show()
+            }
+            else -> {
+                registerFirebase()
+            }
+        }
+    }
+
+    private fun registerFirebase() {
+        val email: String = binding.registerEmail.text.toString().trim{ it <= ' ' }
+        val password: String = binding.registerPsswd.text.toString().trim{ it <= ' ' }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if(task.isSuccessful) {
+                    val user = task.result!!.user!!
+                    val intent = Intent(this, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        putExtra("user_id", user.uid)
+                        putExtra("email_id", email)
+                    }
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "¡Error: No se pudo crear el usuario!", Toast.LENGTH_LONG).show()
+                }
+            }
     }
 }
 
