@@ -49,6 +49,16 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.medicineButton.setOnClickListener {
+            val intent = Intent(this, MedicineFragment::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                putExtra("user_id", userid)
+                putExtra("email_id", emailid)
+            }
+            startActivity(intent)
+            finish()
+        }
+
         binding.profileButton.setOnClickListener {
             startActivity(Intent(this, ProfileFragment::class.java))
             finish()

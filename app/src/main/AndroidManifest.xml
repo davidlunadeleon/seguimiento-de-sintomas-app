@@ -19,6 +19,9 @@
             android:name=".SymptomsFragment"
             android:exported="true"/>
         <activity
+            android:name=".MedicineFragment"
+            android:exported="true"/>
+        <activity
             android:name=".ProfileFragment"
             android:exported="true"/>
         <activity

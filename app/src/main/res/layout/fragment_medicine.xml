@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SymptomsFragment">
+    tools:context=".MedicineFragment">
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mat_symptom_description"
+        android:id="@+id/mat_medicine_description"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="380dp"
         android:layout_height="212dp"
@@ -19,12 +19,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/symptom_slider"
+        app:layout_constraintTop_toBottomOf="@id/mat_medicine_date"
         app:layout_constraintVertical_bias="0.058"
+        app:layout_constraintBottom_toTopOf="@id/medicine_button"
         >
 
         <EditText
-            android:id="@+id/symptom_description"
+            android:id="@+id/medicine_description"
             android:layout_width="match_parent"
             android:layout_height="194dp"
             android:inputType="text"
@@ -32,30 +33,11 @@
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/symptom_slider_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="Intensidad"
-        android:textAlignment="center"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/mat_symptom_name"
-        tools:layout_editor_absoluteX="0dp" />
 
-    <com.google.android.material.slider.Slider
-        android:id="@+id/symptom_slider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:labelBehavior="gone"
-        app:layout_constraintTop_toBottomOf="@id/symptom_slider_text"
-        />
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mat_symptom_name"
+        android:id="@+id/mat_medicine_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,17 +48,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mat_medicine_qty"
+        >
 
         <EditText
-            android:id="@+id/symptom_name"
+            android:id="@+id/medicine_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mat_symptom_date"
+        android:id="@+id/mat_medicine_qty"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="15dp"
+        android:hint="Cantidad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mat_medicine_name"
+        app:layout_constraintBottom_toBottomOf="@id/mat_medicine_date"
+        >
+
+        <EditText
+            android:id="@+id/medicine_qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mat_medicine_date"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,17 +94,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mat_symptom_description">
+        app:layout_constraintTop_toBottomOf="@id/mat_medicine_qty"
+        app:layout_constraintBottom_toTopOf="@id/mat_medicine_description"
+        >
 
         <EditText
-            android:id="@+id/symptom_date"
+            android:id="@+id/medicine_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/symptom_button"
+        android:id="@+id/medicine_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -114,7 +123,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mat_symptom_date"
-        app:layout_constraintVertical_bias="0.881" />
+        app:layout_constraintVertical_bias="0.881"
+        app:layout_constraintTop_toBottomOf="@id/mat_medicine_description"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
