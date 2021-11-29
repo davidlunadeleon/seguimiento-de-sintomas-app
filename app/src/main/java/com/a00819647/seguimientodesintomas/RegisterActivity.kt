@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import com.a00819647.seguimientodesintomas.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
@@ -21,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +68,9 @@ class RegisterActivity : AppCompatActivity() {
             TextUtils.isEmpty(binding.registerName.text.toString().trim{ it <= ' ' }) -> {
                 Toast.makeText(this, "¡Por favor, inserte su nombre!", Toast.LENGTH_LONG).show()
             }
+            TextUtils.isEmpty(binding.registerLastName.text.toString().trim{ it <= ' ' }) -> {
+                Toast.makeText(this, "¡Por favor, inserte su apellido!", Toast.LENGTH_LONG).show()
+            }
             // Caso 2: No hay valor en el apartado de Fecha de Nacimiento
             TextUtils.isEmpty(binding.registerBirth.text.toString().trim{ it <= ' ' }) -> {
                 Toast.makeText(this, "¡Por favor, inserte su fecha de nacimiento!", Toast.LENGTH_LONG).show()
@@ -102,13 +107,37 @@ class RegisterActivity : AppCompatActivity() {
                         putExtra("email_id", email)
                     }
                     startActivity(intent)
+                    createUserData(user.uid)
                     finish()
                 } else {
                     Toast.makeText(this, "¡Error: No se pudo crear el usuario!", Toast.LENGTH_LONG).show()
                 }
             }
     }
+
+    private fun createUserData(uid: String) {
+
+        val id = uid
+        val name = binding.registerName.text.toString().trim{ it <= ' ' }
+        val lastName = binding.registerLastName.text.toString().trim{ it <= ' ' }
+        val dateOfBirth = binding.registerBirth.text.toString().trim{ it <= ' ' }
+        val phone = binding.registerPhone.text.toString().trim{ it <= ' ' }
+        val email = binding.registerEmail.text.toString().trim{ it <= ' ' }
+
+        val hashMap = hashMapOf<String, Any>(
+            "id" to id,
+            "name" to name,
+            "lastName" to lastName,
+            "dateOfBirth" to dateOfBirth,
+            "phone" to phone,
+            "email" to email
+        )
+        db = FirebaseFirestore.getInstance()
+        db.collection("Patients").document("$id").set(hashMap)
+    }
 }
+
+
 
 class DatePickerFragment : DialogFragment() {
 
