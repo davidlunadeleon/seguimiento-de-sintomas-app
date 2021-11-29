@@ -62,12 +62,6 @@ class MedicineFragment : AppCompatActivity() {
         )
         FirebaseUtils().fireStoreDatabase.collection("/Patients/$userid/MedicineIntakes").add(hashMap)
         Toast.makeText(this, "Medicacion registrada con exito", Toast.LENGTH_LONG).show()
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra("user_id", userid)
-            putExtra("email_id", emailid)
-        }
-        startActivity(intent)
         finish()
     }
 

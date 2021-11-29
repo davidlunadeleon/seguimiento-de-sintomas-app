@@ -23,17 +23,17 @@ class MainActivity : AppCompatActivity() {
         if(currentUser == null){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         val userid = intent.getStringExtra("user_id")
         val emailid = intent.getStringExtra("email_id")
 
         binding.userId.text = "User ID :: $userid"
-        binding.emailId.text = "User ID :: $emailid"
+        binding.emailId.text = "User Email :: $emailid"
 
         binding.button.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
@@ -41,27 +41,36 @@ class MainActivity : AppCompatActivity() {
         binding.symptomsButton.setOnClickListener {
             //startActivity(Intent(this, SymptomsFragment::class.java))
             val intent = Intent(this, SymptomsFragment::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 putExtra("user_id", userid)
                 putExtra("email_id", emailid)
             }
             startActivity(intent)
-            finish()
         }
 
         binding.medicineButton.setOnClickListener {
             val intent = Intent(this, MedicineFragment::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 putExtra("user_id", userid)
                 putExtra("email_id", emailid)
             }
             startActivity(intent)
-            finish()
         }
 
         binding.profileButton.setOnClickListener {
             startActivity(Intent(this, ProfileFragment::class.java))
-            finish()
         }
+
+        binding.symptomLogButton.setOnClickListener {
+            startActivity(Intent(this, SymptomsLogFragment::class.java))
+        }
+
+        binding.medicineLogButton.setOnClickListener {
+            startActivity(Intent(this, MedicineLogFragment::class.java))
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        auth.signOut()
+        finish()
     }
 }

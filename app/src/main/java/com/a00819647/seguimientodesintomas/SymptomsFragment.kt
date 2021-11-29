@@ -63,12 +63,6 @@ class SymptomsFragment : AppCompatActivity() {
         )
         FirebaseUtils().fireStoreDatabase.collection("/Patients/$userid/Symptoms").add(hashMap)
         Toast.makeText(this, "Sintoma registrado con exito", Toast.LENGTH_LONG).show()
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra("user_id", userid)
-            putExtra("email_id", emailid)
-        }
-        startActivity(intent)
         finish()
     }
 

@@ -43,7 +43,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="15dp"
         android:width="300dp"
         android:text="Cerrar sesión"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,21 +70,32 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:width="200dp"
-        android:text="Medicamentos"
+        android:text="Medicacion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/symptoms_button" />
 
     <Button
-        android:id="@+id/log_button"
+        android:id="@+id/symptom_log_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:width="200dp"
-        android:text="Registros"
+        android:text="Registros de Sintomas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/medicine_button" />
+
+    <Button
+        android:id="@+id/medicine_log_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:width="200dp"
+        android:text="Registros de Medicaciones"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/symptom_log_button" />
 
     <Button
         android:id="@+id/profile_button"
@@ -96,6 +107,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/log_button"
+        app:layout_constraintTop_toBottomOf="@id/medicine_log_button"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
